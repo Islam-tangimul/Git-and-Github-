@@ -1,6 +1,5 @@
 # Git and GitHub for Biologists
-This repository is a beginner-friendly guide to using Git and GitHub, designed specifically for biologists and life science researchers.  
-Whether you’re managing DNA sequence data, statistical analysis scripts, or collaborative writing projects, Git and GitHub can help you keep your work organized, reproducible, and easy to share.
+This repository is a beginner-friendly guide to using Git and GitHub, designed specifically for biologists and life science researchers. Whether you’re managing DNA sequence data, statistical analysis scripts, or collaborative writing projects, Git and GitHub can help you keep your work organized, reproducible, and easy to share.
 
 ## What You'll Learn
 - The basics of version control with Git
