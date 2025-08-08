@@ -1,0 +1,279 @@
+# Lesson 01 – Introduction to Git and GitHub for Biologists
+
+##  Why Git and GitHub?
+Biological research often involves many files — datasets, scripts, and figures — that change over time.  
+Git helps you **track changes** in your files, and GitHub lets you **share and collaborate** with others.
+
+Benefits:
+- **Version control**: Go back to previous versions of your work
+- **Collaboration**: Work together without overwriting each other’s changes
+- **Reproducibility**: Keep a clear history of your analyses
+
+##  Key Concepts
+- **Repository (repo)**: A project folder tracked by Git
+- **Commit**: A snapshot of your files at a specific moment
+- **Branch**: A separate copy of your work for experimenting or developing
+- **Merge**: Combining changes from different branches
+- **Remote**: A copy of your repo stored online (e.g., GitHub)
+
+## 🛠 Tools You’ll Need
+1. **Git** – Install from [https://git-scm.com](https://git-scm.com)
+2. **GitHub account** – Sign up at [https://github.com](https://github.com)
+3. **Text editor** – VS Code or RStudio work well
+
+##  Your First Task
+1. Create a GitHub account (if you don’t have one)
+2. Install Git on your computer
+3. Set your Git identity:
+   # bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+
+
+# Lesson 02 – Installing Git
+
+Before we can start tracking your research projects with Git, you need to have it installed on your computer.  
+Think of Git as your *lab equipment* for version control — without it, you can’t run any experiments.
+
+## Step 1 – Check if Git is Already Installed
+Open your terminal (Mac/Linux) or **Git Bash** / Command Prompt (Windows) and type:
+
+# in bash
+git --version
+
+Step 2 – Download Git and click Next for Windows
+Windows	ttps://git-scm.com/download/win
+
+Step 3 – Install on Linux (Ubuntu)
+
+#in bash
+sudo apt update
+sudo apt install git
+
+Step 4 – Configure Git (First-Time Setup)
+# in bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+
+Check that it worked:
+git config --list
+## You should see:
+user.name=Your Name
+user.email=you@example.com
+
+Step 5 – Optional: Set Your Default Branch Name
+By default, Git’s main branch is called master.
+Many projects now use main instead.
+
+Set it to main:
+git config --global init.defaultBranch main
+
+🧩 Step 6 – Install a Text Editor (Optional but Recommended)
+You’ll need an editor to modify files in your projects.
+
+Popular choices:
+VS Code – General-purpose, supports many languages: https://code.visualstudio.com/
+RStudio – Ideal for R users: https://posit.co/download/
+
+
+# Lesson 03 – Creating Your First GitHub Repository
+By the end of this lesson, you will:
+1. Create a new repository on GitHub
+2. Connect it to your local computer
+3. Add and commit your first files
+4. Push them to GitHub so they’re available online
+
+Think of this as **setting up your lab notebook in the cloud**.
+
+
+##  Step 1 – Create a New Repository on GitHub
+
+1. Log in to your GitHub account: [https://github.com](https://github.com)
+2. Click the **+** in the top right → **New repository**
+3. Fill in:
+   - **Repository name**: `my-first-repo` (or any name you like)
+   - **Description**: A short summary of your project
+   - **Visibility**: Public (or Private if you want to keep it hidden)
+4. Check **Add a README** ✅
+5. Choose a **license** (MIT is a good default for open sharing)
+6. Click **Create repository**
+
+##  Step 2 – Clone the Repository to Your Computer
+
+On your new repo’s page, click the green **Code** button and copy the HTTPS link.
+
+Example:
+https://github.com/your-username/my-first-repo.git
+
+Then, in your terminal:
+## inbash
+git clone https://github.com/your-username/my-first-repo.git
+cd my-first-repo
+This creates a local copy of your repository.
+
+## Step 3 – Add Your First File
+Let’s simulate adding a lab note.
+echo "This is my first project with Git and GitHub!" > notes.txt
+
+## Step 4 – Stage and Commit the File
+Check the status:
+git status
+You’ll see notes.txt as untracked.
+
+Stage it:
+git add notes.txt
+Commit it:
+git commit -m "Added first notes file"
+⬆ 
+# Step 5 – Push Changes to GitHub
+Send your local changes to the GitHub cloud:
+git push origin main
+Now refresh your GitHub repository page — you should see notes.txt online.
+
+Step 6 – Verify Everything Works (GitHub shows your new file in the repo)
+-You can click the file to see its contents
+-The commit message appears in the history
+
+## Common Pitfalls
+Problem	Likely Cause	Fix
+-Permission denied (publickey)	>> SSH key not set up	>> Use HTTPS link instead of SSH, or set up SSH keys
+-repository not found >>	Wrong URL or username >>	Double-check the git clone link
+-error: failed to push some refs >>	Remote branch mismatch	Run git pull origin >> main before pushing
+
+## You can now:
+Create a GitHub repository
+Clone it locally
+Add, commit, and push files
+
+
+# Lesson 04 – Branching and Merging
+In biology, you often run **parallel experiments** to test different ideas.  
+You wouldn’t mix samples until you’re sure they work — the same is true for code and data analysis.
+
+In Git, **branches** let you:
+- Create a safe copy of your work
+- Test changes without affecting your main version
+- Merge successful results back into your main project
+
+## Step 1 – Check Your Current Branch
+When you first create a repo, you start on the `main` branch.
+# inbash
+git branch
+Example output:
+* main
+The * shows your current branch.
+
+## Step 2 – Create a New Branch
+Let’s say you want to try a different analysis method without affecting the main results.
+git branch new-analysis
+Switch to it:
+git checkout new-analysis
+
+You can combine these two steps:
+git checkout -b new-analysis
+
+## Step 3 – Make Changes in the New Branch
+Example: Edit your notes file.
+echo "Testing a new analysis approach" >> notes.txt
+Stage and commit:
+git add notes.txt
+git commit -m "Added notes for new analysis"
+
+## Step 4 – Switch Between Branches
+To go back to main:
+git checkout main
+Notice: Your changes from new-analysis aren’t here — they live only in that branch.
+
+## Step 5 – Merging Branches
+If your new branch changes are good, merge them into main.
+Switch to main:
+git checkout main
+Merge:
+git merge new-analysis
+Push to GitHub:
+git push origin main
+⚠ Handling Merge Conflicts
+Sometimes changes in two branches affect the same line in a file.
+Git will mark the conflict like this:
+<<<<<<< main
+Original text
+=======
+New text from the branch
+>>>>>>> new-analysis
+
+To fix:
+Edit the file to keep the correct version (or combine them)
+Stage and commit the resolved file:
+
+git add notes.txt
+git commit -m "Resolved merge conflict"
+
+✅You can now:
+Create and switch between branches
+Make experimental changes safely
+Merge branches back together
+Resolve conflicts when they arise
+
+# Lesson 05 – Collaborating via GitHub
+In research, projects are rarely solo. You might:
+- Share raw data with lab members
+- Have a statistician help with analysis
+- Co-author figures with collaborators across the globe
+
+GitHub makes collaboration easier by:
+- Hosting a **shared copy** of your project online
+- Allowing multiple people to work on it at once
+- Providing tools to review and approve changes before they are merged
+
+## Step 1 – Adding Collaborators to Your Repository
+1. Go to your repository on GitHub
+2. Click **Settings** → **Collaborators and teams**
+3. Add your teammate’s GitHub username
+4. They’ll get an invite — once they accept, they can push changes
+
+##  Step 2 – Workflow for Collaborative Projects
+A common approach:
+1. **Main branch (`main`)** → Always contains stable, working code/data
+2. Each collaborator creates a **branch** for their work
+3. They push their branch to GitHub
+4. They open a **Pull Request (PR)** to propose merging into `main`
+5. The team reviews the PR, discusses, and merges if approved
+
+##  Step 3 – Forking for Open Collaboration
+If your repo is public and someone without write access wants to contribute:
+1. They click **Fork** (this creates a personal copy of your repo)
+2. They make changes in their fork
+3. They open a Pull Request to your repo
+This is common for open-source projects.
+
+##  Step 4 – Creating a Pull Request
+
+From your repository on GitHub:
+1. Click **Pull requests** → **New pull request**
+2. Select your branch as the source and `main` as the target
+3. Add a **title** and **description** of your changes
+4. Submit the pull request
+
+## Step 5 – Reviewing Pull Requests
+
+When reviewing:
+- **Read the description** for context
+- **Check the “Files changed” tab** for what was modified
+- Leave comments if something needs clarification or adjustment
+- Approve and merge when ready
+
+##  Step 6 – Handling Conflicts in Collaboration
+
+If two people change the same file in different ways:
+- GitHub will mark the PR as having a **merge conflict**
+- You must resolve the conflict locally (see Lesson 04) or via GitHub’s web editor before merging
+
+##  Step 7 – Keeping Your Local Repo Up-to-Date
+
+Before starting new work:
+# inbash
+git pull origin main
+
+
+
+
