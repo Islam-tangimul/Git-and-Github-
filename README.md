@@ -26,7 +26,7 @@ git clone https://github.com/<your-username>/Git-and-GitHub.git
 
 -Navigate into the repository
 #bash
-cd Git-and-GitHub-for-biologists
+cd Git-and-GitHub
 
  
 
